@@ -27,7 +27,7 @@ public class ActivateAccount extends HttpServlet {
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String userEmail = request.getParameter("key1");
+		String userEmail = request.getParameter("key");
 		
 		Connection con = ConnectionDB.getConnection();
 		

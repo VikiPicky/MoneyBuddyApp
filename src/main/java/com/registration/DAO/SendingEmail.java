@@ -39,7 +39,7 @@ public class SendingEmail {
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
 			message.setSubject("MoneyBuddy Email Verification");
 			message.setText("Registered successfully.Please verify your account using by following the link "
-					+ " http://localhost:8080/Test/ActivateAccount?key1=" + userEmail);
+					+ "http://localhost:8080/TestMaven/ActivateAccount?key=" +userEmail);
 			Transport.send(message);
 		} catch (Exception ex) {
 			System.out.println("Sending Email to User" + ex);
