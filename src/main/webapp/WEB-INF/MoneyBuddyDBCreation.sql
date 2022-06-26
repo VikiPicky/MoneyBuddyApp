@@ -2,6 +2,9 @@
 --USERNAME = "dbuser";
 --PASSWORD = "dbpassword";
 
+--CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'dbpassword';
+--GRANT ALL PRIVILEGES ON moneybuddy.* TO 'dbuser'@'localhost';
+
 CREATE SCHEMA IF NOT EXISTS moneybuddy;
 USE moneybuddy ;
 
