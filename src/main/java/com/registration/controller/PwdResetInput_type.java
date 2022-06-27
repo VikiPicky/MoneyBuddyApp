@@ -69,7 +69,7 @@ public class PwdResetInput_type extends HttpServlet {
 				System.out.println("Password updated " + i);
 				if (i > 0) {
 					
-					response.sendRedirect("Home.jsp");
+					response.sendRedirect("SignIn.html");
 				} else {
 					response.sendRedirect("index.html");
 				}
