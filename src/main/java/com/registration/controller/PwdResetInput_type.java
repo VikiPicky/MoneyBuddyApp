@@ -60,7 +60,6 @@ public class PwdResetInput_type extends HttpServlet {
 			PreparedStatement pst = con.prepareStatement("SELECT email, active, password FROM user WHERE email='" + email + "' AND active='1';");
 			ResultSet rs = pst.executeQuery();
 
-
 			if (rs.next()) {
 				PreparedStatement update = con
 						.prepareStatement("UPDATE user SET password='" + hashedNewPwd +"' WHERE active='1' AND email='" + email + "';");
@@ -78,8 +77,7 @@ public class PwdResetInput_type extends HttpServlet {
 			}
 		} catch (Exception ex) {
 			System.out.println("Password Update " + ex.getMessage());
-		}
-		
+		}		
 	}
 
 	private static String createHash(String newPassword) throws NoSuchAlgorithmException {

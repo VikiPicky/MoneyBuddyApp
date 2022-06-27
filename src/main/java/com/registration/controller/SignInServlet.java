@@ -48,7 +48,7 @@ public class SignInServlet extends HttpServlet {
 			hashedLoginPwd = createHash(password);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
-			throw new ServletException("Извините, всё сломалось.!");
+			throw new ServletException("Pwd not hashed!");
 		}
 
 		// SignIn Bean Code
