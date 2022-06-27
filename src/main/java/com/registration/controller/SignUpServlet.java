@@ -9,11 +9,11 @@ import java.security.NoSuchAlgorithmException;
 import com.registration.DAO.UserDao;
 import com.registration.model.UserBean;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/SignUpServlet")
 public class SignUpServlet extends HttpServlet {
@@ -47,7 +47,7 @@ public class SignUpServlet extends HttpServlet {
 			hashedPwd = createHash(password);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
-			throw new ServletException("Извините, всё сломалось.!");
+			throw new ServletException("SignUp Servlet - hashing did not work");
 		}
 
 		UserBean user = new UserBean();
@@ -70,7 +70,7 @@ public class SignUpServlet extends HttpServlet {
 						+ "! Check your Email for validation link and start using MoneyBuddy today." + "</h3></html>";
 				PrintWriter writer = response.getWriter();
 				writer.write(htmlResponse);
-				
+
 				System.out.println("From SignUp Servlet - Email sent");
 			} else {
 

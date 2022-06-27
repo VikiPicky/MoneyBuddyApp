@@ -10,14 +10,16 @@ public class ConnectionDB {
 	private static final String PASSWORD = "";
 	private static final String CONN_STRING = "jdbc:mysql://localhost/";
 	
-	static Connection connectionDB;
+	static Connection connection;
 	
 	public static Connection getConnection() {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver"); 
-			connectionDB = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+			System.out.println("Database 1");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+			System.out.println("Database 2");
 				
-			Statement stmt = connectionDB.createStatement();
+			Statement stmt = connection.createStatement();
 			
 			String sql = 
 					"CREATE SCHEMA IF NOT EXISTS moneybuddy;"; 
@@ -44,6 +46,6 @@ public class ConnectionDB {
 		} catch (Exception ex) {
 			System.out.println("From My Connection Class" + ex);
 		}
-		return connectionDB;
+		return connection;
 	}
 }

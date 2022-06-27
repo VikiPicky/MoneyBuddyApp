@@ -15,7 +15,7 @@ public class UserDao {
 			String password = userBean.getPassword();
 			String email = userBean.getEmail();
 			String telephone = userBean.getTelephone();
-			String myHash = userBean.getmyHash();
+
 			
 			Connection con = ConnectionDB.getConnection();
 			 try {
