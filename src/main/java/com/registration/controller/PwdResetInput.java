@@ -1,41 +1,70 @@
 package com.registration.controller;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class PwdResetInput
- */
+import com.registration.DAO.ConnectionDB;
+
 @WebServlet("/PwdResetInput")
 public class PwdResetInput extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+     
     public PwdResetInput() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String userEmail = request.getParameter("key");
+		Connection con = ConnectionDB.getConnection();		
+		
+		System.out.println("Pwd Input: Connected");
+		response.sendRedirect("PwdReset_PwdInput.html");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+		String newPassword = request.getParameter("password");
+		
+		String hashedNewPwd;
+		
+		try {
+			hashedNewPwd = createHash(newPassword);
+			
+			System.out.println("Pwd Input: Hashed New Pwd created");
+			
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			throw new ServletException("Swd Input Servlet- hashing did not work");
+		}
 	}
+	
+	
+	
+	
+	private static String createHash(String newPassword) throws NoSuchAlgorithmException {
 
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] messageDigest = md.digest(newPassword.getBytes());
+		BigInteger no = new BigInteger(1, messageDigest);
+
+		String hashtext = no.toString(16);
+		while (hashtext.length() < 32) {
+			hashtext = "0" + hashtext;
+		}
+		return hashtext;
+	}
 }

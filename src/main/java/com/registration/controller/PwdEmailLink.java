@@ -78,7 +78,7 @@ public class PwdEmailLink extends HttpServlet {
 			Transport.send(message);
 
 		} catch (Exception ex) {
-			System.out.println("Sending Email to User" + ex);
+			System.out.println("Sending Pwd Reset Email to User" + ex);
 		}
 	}
 }
