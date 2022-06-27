@@ -29,6 +29,6 @@
 </div>
 
 <h1>Ready to leave?</h1>
-<a href="SignOut" class="btn btn-white btn-animated">Sign Out</a>
+<a href="./SignOutServlet" class="btn btn-white btn-animated">Sign Out</a>
 </body>
 </html>

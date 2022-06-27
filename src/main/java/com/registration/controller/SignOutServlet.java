@@ -6,23 +6,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/PwdResetEmail")
-public class PwdResetEmailServlet extends HttpServlet {
+@WebServlet("/SignOutServlet")
+public class SignOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PwdResetEmailServlet() {
+    public SignOutServlet() {
         super();
-
+       
     }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		response.sendRedirect("index.html");
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		doGet(request, response);
 	}
 
