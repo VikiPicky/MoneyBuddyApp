@@ -63,7 +63,7 @@ public class SignInServlet extends HttpServlet {
 		if (signInDao.ActiveMatchExists(signInbean)) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("session_user", email);
-			RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("Home.html");
 			rd.forward(request, response);
 		} else {
 			response.sendRedirect("index.html");
