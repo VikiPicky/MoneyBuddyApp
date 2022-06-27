@@ -59,7 +59,10 @@ public class ProfileServlet extends HttpServlet {
 			out.print("Contact No :: " + telephone);
 			out.print("<br>");
 			out.print("<span class=\"psw\">Change <a href=\"PwdReset_PwdInput.html\">password?</a></span>");
-			
+			out.print("<br>");
+			out.print("<br>");
+			out.print("<br>");
+			out.print("<button onclick=\"history.back()\">Go Home</button>");
 	        
 	        out.println("</center>");
 	        out.close();
