@@ -10,7 +10,6 @@ public class UserBean {
 	private String telephone;
 	private String myHash;
 	
-	
 	public String getFirstName() {
 		return firstName;
 	}
