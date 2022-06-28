@@ -46,9 +46,8 @@ public class ProfileServlet extends HttpServlet {
 			response.setContentType("text/html");
 		    PrintWriter out = response.getWriter();
 		    
-		    out.println("<center><h1>Details</h1>");
-			
-			out.print("First Name :: " + firstname);
+		    out.print("<html><body><h1>See you Profile below</h1>"
+		    		+ "<body>First Name :: " + firstname);
 			out.print("<br>");
 			out.print("Last Name :: " + lastname);
 			out.print("<br>");
@@ -64,7 +63,7 @@ public class ProfileServlet extends HttpServlet {
 			out.print("<br>");
 			out.print("<button onclick=\"history.back()\">Go Home</button>");
 	        
-	        out.println("</center>");
+	        out.println("</center></body></html>");
 	        out.close();
 			
 		}
