@@ -11,8 +11,6 @@
   border: 1px solid #ddd;
   padding: 8px;
 }
-
-
 #profiletb tr:hover {background-color: #ddd;}
 
 #profiletb th {

@@ -20,7 +20,7 @@ public class UserDao {
 			Connection con = ConnectionDB.getConnection();
 			 try {
 				 String INSERT_USERS_SQL = "INSERT INTO USER" +
-				            "  (firstName, lastName, userName, password, email, telephone, Hash, active ) VALUES " +
+				            "  (firstName, lastName, userName, password, email, telephone, Admin, active ) VALUES " +
 				            " (?, ?, ?, ?, ?, ?, ?, 0);";
 				 
 				 PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL);
@@ -30,7 +30,7 @@ public class UserDao {
 				 preparedStatement.setString(4, password);
 				 preparedStatement.setString(5, email);
 				 preparedStatement.setString(6, telephone);
-				 preparedStatement.setString(7, "XXX");
+				 preparedStatement.setString(7, "0");
 				 
 				 int i = preparedStatement.executeUpdate();
 				 if (i != 0) {

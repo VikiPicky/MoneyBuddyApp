@@ -28,7 +28,7 @@ public class ConnectionDB {
 			String sql2 = "USE moneybuddy;";
 			stmt.executeUpdate(sql2);
 				
-			String sql3 = "CREATE TABLE IF NOT EXISTS user (UserID INT NOT NULL auto_increment, FirstName VARCHAR(45) NOT NULL, LastName VARCHAR(45) NOT NULL, UserName VARCHAR(45) NOT NULL, Password VARCHAR(45) NOT NULL, email VARCHAR(45) NOT NULL, Telephone VARCHAR(45) NOT NULL, Hash VARCHAR(45) NOT NULL, Active INT(1) NOT NULL, PRIMARY KEY (UserID));";
+			String sql3 = "CREATE TABLE IF NOT EXISTS user (UserID INT NOT NULL auto_increment, FirstName VARCHAR(45) NOT NULL, LastName VARCHAR(45) NOT NULL, UserName VARCHAR(45) NOT NULL, Password VARCHAR(45) NOT NULL, email VARCHAR(45) NOT NULL, Telephone VARCHAR(45) NOT NULL, Admin INT(1) NOT NULL, Active INT(1) NOT NULL, PRIMARY KEY (UserID));";
 			stmt.executeUpdate(sql3);
 					
 			String sql4 = "CREATE TABLE IF NOT EXISTS income (IncomeID INT NOT NULL auto_increment,Date DATE NOT NULL,Amount DECIMAL(10,2) NOT NULL, UserID INT NOT NULL, PRIMARY KEY (IncomeID), CONSTRAINT FK_INCOME_USER FOREIGN KEY (UserID) REFERENCES USER(UserID));";
