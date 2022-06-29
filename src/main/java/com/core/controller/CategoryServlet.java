@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.core.DAO.CategoryDao;
 import com.core.model.CategoryBean;
+import com.registration.model.UserBean;
 
 @WebServlet("/CategoryServlet")
 public class CategoryServlet extends HttpServlet {
@@ -33,8 +34,8 @@ public class CategoryServlet extends HttpServlet {
 		categoryBean.setCategoryName(category);
 		System.out.println("From Category Servlet - Set");
 
-		String email = (String) request.getSession().getAttribute("session_user");
+		UserBean userBean = (UserBean) request.getSession().getAttribute("session_user");
 		CategoryDao dao = new CategoryDao();
-		dao.AddCategory(categoryBean, email);
+		dao.addCategory(categoryBean, userBean);
 	}
 }

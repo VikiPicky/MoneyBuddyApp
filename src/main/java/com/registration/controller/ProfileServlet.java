@@ -24,14 +24,10 @@ public class ProfileServlet extends HttpServlet {
 		
 		System.out.println("Profile Servlet IN"  );
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		System.out.println("Hello, " + request.getSession().getAttribute("session_user"));
-		String email = (String) request.getSession().getAttribute("session_user");
+		UserBean userBean = (UserBean) request.getSession().getAttribute("session_user");
+		System.out.println("Hello, " + userBean.getFirstName());
 		
-		ProfileDao dao = new ProfileDao();		
-
-		UserBean user = dao.getProfileDetails(email);
-		request.setAttribute("user", user);
+		request.setAttribute("user", userBean);
 
 		request.getRequestDispatcher("/Profile.jsp").forward(request, response);
 	}

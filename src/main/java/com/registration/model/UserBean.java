@@ -8,7 +8,24 @@ public class UserBean {
 	private String password;	
 	private String email;
 	private String telephone;
-	private String myHash;
+
+	
+	public UserBean() {
+		super();		
+	}
+		
+	public UserBean(int userID, String firstName, String lastName, String userName, String password, String email,
+			String telephone) {
+		super();
+		this.userID = userID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.telephone = telephone;
+
+	}
 	
 	public String getFirstName() {
 		return firstName;
@@ -47,12 +64,6 @@ public class UserBean {
 		this.email = email;
 	}	
 	
-	public String getmyHash() {
-		return myHash;
-	}
-	public void setmyHash(String myHash) {
-		this.myHash = myHash;
-	}
 	public int getUserID() {
 		return userID;
 	}

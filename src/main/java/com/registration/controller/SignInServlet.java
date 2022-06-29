@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.registration.DAO.SignInDao;
+import com.registration.DAO.UserDao;
 import com.registration.model.SignInBean;
+import com.registration.model.UserBean;
 
 @WebServlet("/SignInServlet")
 public class SignInServlet extends HttpServlet {
@@ -51,18 +53,14 @@ public class SignInServlet extends HttpServlet {
 			throw new ServletException("Pwd not hashed!");
 		}
 
-		// SignIn Bean Code
-		SignInBean signInbean = new SignInBean();
-		signInbean.setEmail(email);
-		signInbean.setHashedLoginPwd(hashedLoginPwd);
+		UserDao userDao = new UserDao();
+		
 
-		// SignIn DAO
-		SignInDao signInDao = new SignInDao();
-		boolean activeMatchExists = signInDao.ActiveMatchExists(signInbean);
+		UserBean userBean = userDao.getActiveUser(email, hashedLoginPwd);
 
-		if (signInDao.ActiveMatchExists(signInbean)) {
+		if (userBean != null) {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("session_user", email);
+			session.setAttribute("session_user", userBean);
 			RequestDispatcher rd = request.getRequestDispatcher("Home.html");
 			rd.forward(request, response);
 		} else {

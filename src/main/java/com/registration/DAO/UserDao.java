@@ -2,6 +2,9 @@ package com.registration.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.registration.model.SignInBean;
 import com.registration.model.UserBean;
 
 public class UserDao {
@@ -15,7 +18,6 @@ public class UserDao {
 			String password = userBean.getPassword();
 			String email = userBean.getEmail();
 			String telephone = userBean.getTelephone();
-
 			
 			Connection con = ConnectionDB.getConnection();
 			 try {
@@ -40,8 +42,7 @@ public class UserDao {
 					 sendingEmail.sendEmail();
 					 System.out.println("From UserDao - Email sent");
 					 
-					 return "SUCCESS";
-					 
+					 return "SUCCESS";					 
 				 }
 				 
 			 } catch(Exception ex) {
@@ -49,4 +50,42 @@ public class UserDao {
 			 }			
 			return "ERROR";			
 		}
+		
+		public UserBean getActiveUser(String email, String hashedLoginPwd) {
+
+			Connection con = ConnectionDB.getConnection();
+
+			System.out.println("From SignIN DAO - CONNECTED");
+
+			try {
+				String sqlQuery = "SELECT * from  user WHERE email=? AND password=? AND active=1;";
+				
+				System.out.println("From SignIN DAO - " + sqlQuery);
+				PreparedStatement preparedStatement = con.prepareStatement(sqlQuery);
+				preparedStatement.setString(1, email);
+				preparedStatement.setString(2, hashedLoginPwd);
+				
+				System.out.println("From SignIN DAO - " + email + " " + hashedLoginPwd);
+
+				
+				ResultSet rs = preparedStatement.executeQuery();
+				if (rs.last() && rs.getRow() > 0) {
+					return new UserBean(
+							rs.getInt("userID"),
+							rs.getString("firstName"),
+							rs.getString("lastName"),
+							rs.getString("userName"),
+							rs.getString("password"),
+							rs.getString("email"),
+							rs.getString("telephone"));
+
+				}
+
+			} catch (Exception ex) {
+				System.out.println("SignInDao " + ex);
+			}
+			return null;
+		} 
+		
+		
 	}
