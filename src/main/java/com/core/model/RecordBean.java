@@ -1,4 +1,4 @@
-package com.registration.model;
+package com.core.model;
 
 public class RecordBean {
 	private String date;

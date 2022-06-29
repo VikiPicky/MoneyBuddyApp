@@ -1,4 +1,4 @@
-package com.registration.model;
+package com.core.model;
 
 public class IncomeBean {
 	private String date;
