@@ -29,13 +29,13 @@ public class CategoryServlet extends HttpServlet {
 		
 		String category = request.getParameter("category");
 		
-		CategoryBean bean = new CategoryBean(0, category, 0);
-		bean.setCategoryName(category);		
+		CategoryBean categoryBean = new CategoryBean(0, category, 0);
+		categoryBean.setCategoryName(category);		
 		System.out.println("From Category Servlet - Set");
 		
 		String email = (String) request.getSession().getAttribute("session_user");
 		CategoryDao dao = new CategoryDao();
-		dao.AddCategory(null, email);
+		dao.AddCategory(categoryBean, email);
 		
 	}
 

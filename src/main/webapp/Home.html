@@ -13,7 +13,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<style>
-input[type=text], select {
+input[type=text], [type=date], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -38,6 +38,11 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
+.container{
+border-style: solid;
+margin-top : 30px;
+}
+
 </style>
 	
 </head>
@@ -57,6 +62,7 @@ input[type=submit]:hover {
 
 	<form action="IncomeServlet" method="post">
 		<div class="container">
+		<h2>Your Income</h2>
 			<label for="income"><b>Income</b></label> 
 			<input type="text"	placeholder="Enter Income" name="income" required>
 			 <input type="submit" value="Submit">
@@ -65,6 +71,7 @@ input[type=submit]:hover {
 
 	<form action="CategoryServlet" method="post">
 		<div class="container">
+		<h2>Choose Expense Category</h2>
 			<label for="category"><b>Category</b></label> 
 			<input type="text" placeholder="Enter Category" name="category" required>
 			 <input type="submit" value="Submit">
@@ -73,8 +80,13 @@ input[type=submit]:hover {
 	
 		<form action="RecordServlet" method="post">
 		<div class="container">
+		<h2>Make an Expense Record</h2>
 			<label for="record"><b>Record</b></label> 
 			<input type="text"	placeholder="Enter Expense Record" name="income" required>
+			
+			  <label for="birthday">Date</label>
+  				<input type="date" id="date" name="date">
+			
 			 <input type="submit" value="Submit">
 		</div>
 	</form>
