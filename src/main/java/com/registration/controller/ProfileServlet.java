@@ -28,12 +28,8 @@ public class ProfileServlet extends HttpServlet {
 		System.out.println("Hello, " + request.getSession().getAttribute("session_user"));
 		String email = (String) request.getSession().getAttribute("session_user");
 		
-		System.out.println("Profile Servlet " + "session_user" );
+		ProfileDao dao = new ProfileDao();		
 
-		ProfileDao dao = new ProfileDao();
-		
-		System.out.println("Profile Servlet IN"  );
-		
 		UserBean user = dao.getProfileDetails(email);
 		request.setAttribute("user", user);
 

@@ -1,7 +1,7 @@
 package com.registration.model;
 
 public class UserBean {
-	
+	private int userID;
 	private String firstName;
 	private String lastName;
 	private String userName;
@@ -52,5 +52,11 @@ public class UserBean {
 	}
 	public void setmyHash(String myHash) {
 		this.myHash = myHash;
+	}
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}	
 }

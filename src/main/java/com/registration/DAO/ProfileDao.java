@@ -24,6 +24,7 @@ public class ProfileDao {
 			ResultSet set = statement.executeQuery();
 			while (set.next()) {
 				user = new UserBean();
+				user.setUserID(set.getInt("userid"));
 				user.setFirstName(set.getString("firstname"));
 				user.setLastName(set.getString("lastname"));
 				user.setUserName(set.getString("username"));
