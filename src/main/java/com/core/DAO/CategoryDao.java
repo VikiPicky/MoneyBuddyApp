@@ -23,24 +23,22 @@ public class CategoryDao {
 		String categoryName = category.getCategoryName();
 
 		try {
-			
+
 			String sqlQuery = "SELECT userid from user  WHERE email='" + email + "' AND active=1 ;";
 			PreparedStatement pst = con.prepareStatement(sqlQuery);
 			ResultSet rs = pst.executeQuery(sqlQuery);
+			
 			while (rs.next()) {
-				int userId  = rs.getInt("userid");
-	}
-						
-			String INSERT_CATEGORY_SQL = "INSERT INTO CATEGORY" +
-		            "  (categoryName, userId) VALUES " +
-		            " (?, ?);";
-		 
-		 PreparedStatement preparedStatement = con.prepareStatement(INSERT_CATEGORY_SQL);
-		 preparedStatement.setString(1, categoryName);
+				int userId = rs.getInt("userid");
+				String INSERT_CATEGORY_SQL = "INSERT INTO CATEGORY" + "  (categoryName, userId) VALUES " + " (?, ?);";
 
+				PreparedStatement preparedStatement = con.prepareStatement(INSERT_CATEGORY_SQL);
+				preparedStatement.setString(1, categoryName);
+				preparedStatement.setInt(1, userId);
+			}
 
 		} catch (Exception ex) {
-			System.out.println("From CatrgoryDao" + ex);
+			System.out.println("From CategoryDao" + ex);
 		}
 		return true;
 	}
