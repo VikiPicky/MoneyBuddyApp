@@ -13,30 +13,28 @@ import com.core.model.CategoryBean;
 @WebServlet("/CategoryServlet")
 public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public CategoryServlet() {
-        super();
 
-    }
+	public CategoryServlet() {
+		super();
+	}
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
-		
+
 		String category = request.getParameter("category");
-		
+
 		CategoryBean categoryBean = new CategoryBean(0, category, 0);
-		categoryBean.setCategoryName(category);		
+		categoryBean.setCategoryName(category);
 		System.out.println("From Category Servlet - Set");
-		
+
 		String email = (String) request.getSession().getAttribute("session_user");
 		CategoryDao dao = new CategoryDao();
 		dao.AddCategory(categoryBean, email);
-		
 	}
-
 }
