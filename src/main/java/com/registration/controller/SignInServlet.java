@@ -61,12 +61,11 @@ public class SignInServlet extends HttpServlet {
 		if (userBean != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("session_user", userBean);
-			RequestDispatcher rd = request.getRequestDispatcher("Home.html");
+			RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
 			rd.forward(request, response);
 		} else {
 			response.sendRedirect("index.html");
 		}
-
 	}
 
 	private static String createHash(String password) throws NoSuchAlgorithmException {

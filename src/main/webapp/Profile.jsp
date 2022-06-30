@@ -19,7 +19,7 @@
 <body>
 	<header>
 		<div class="navbar">
-			<a href="Home.html">Home</a> <a
+			<a href="Home.jsp">Home</a> <a
 				href="<%=response.encodeURL("ProfileServlet")%>">Profile</a> <a
 				href="Statistics.html">Statistics</a> <a href="Logout.html">Logout</a>
 		</div>
