@@ -62,7 +62,7 @@ input[type=submit]:hover {
 	</header>
 	<div class="main">
 		<p>Some text some text some text some text..</p>
-	</div>
+	
 
 	<h1>Make an Expense Record</h1>
 
@@ -112,9 +112,9 @@ try
 {       
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/moneybuddy","root","");
         String sql = "SELECT Category, Record, Amount, Date, Comment, TaxAmount from RECORD where userid=?";
-        out.println("Home.jsp Table connected");
+        
         PreparedStatement preparedStatement = con.prepareStatement(sql);
-        UserBean userBean = new UserBean();
+		UserBean userBean = (UserBean) request.getSession().getAttribute("session_user");
         preparedStatement.setInt(1, userBean.getUserID());
 	
         ResultSet rs = preparedStatement.executeQuery();
@@ -125,7 +125,7 @@ try
         else
         {%>
        
-        <table border="1">
+        <table id=recordOutput border="1">
         <tr>
         <th>Category</th>
         <th>Record</th>
@@ -160,7 +160,7 @@ catch(Exception e)
 }
 %>
 </table>
-	
+	</div>
 </body>
 </html>
 
