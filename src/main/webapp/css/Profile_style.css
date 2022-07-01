@@ -52,4 +52,8 @@ body {margin:0;}
 .main {
   margin-top: 30px; /* Add a top margin to avoid content overlay */
 }
-
+body {
+margin:0;
+width: 70%;
+margin: auto;
+}

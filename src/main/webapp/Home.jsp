@@ -50,6 +50,32 @@ input[type=submit]:hover {
 	border-style: solid;
 	margin-top: 30px;
 }
+
+body {
+margin:0;
+}
+
+#RecordTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#RecordTable td, #RecordTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#RecordTable tr:hover {background-color: #ddd;}
+
+#RecordTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
 </style>
 
 </head>
@@ -125,7 +151,7 @@ try
         else
         {%>
        
-        <table id=recordOutput border="1">
+        <table id=RecordTable border="1">
         <tr>
         <th>Category</th>
         <th>Record</th>
