@@ -91,15 +91,14 @@ margin:0;
 		</div>
 	</header>
 	<div class="main">
-		<p>Some text some text some text some text..</p>
+
+	<br>
+	<h1 style="width: 70%; margin: auto">Make an Expense Record</h1>
+
+
+	<form action="RecordServlet" method="post" >
 	
-
-	<h1>Make an Expense Record</h1>
-
-
-	<form action="RecordServlet" method="post">
-	
-		<div class="container">		
+		<div class="container" class="RecordForm" style="width: 70%; margin: auto">		
 			
 	<label for="category">Choose a category</label>		
 	<select name="category" id="categories" name="category">

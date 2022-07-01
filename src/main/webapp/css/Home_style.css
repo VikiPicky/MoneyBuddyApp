@@ -62,7 +62,7 @@ input[type=submit]:hover {
 #recordOutput {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 70%;
 }
 
 #recordOutput td, #profiletb th {
