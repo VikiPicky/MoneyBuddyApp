@@ -19,9 +19,10 @@
 <body>
 	<header>
 		<div class="navbar">
-			<a href="Home.jsp">Home</a> <a
-				href="<%=response.encodeURL("ProfileServlet")%>">Profile</a> <a
-				href="Statistics.html">Statistics</a> <a href="Logout.html">Logout</a>
+			<a href="Home.jsp">Home</a> 
+			<a href="<%=response.encodeURL("ProfileServlet")%>">Profile</a> 
+			<a href="Statistics.jsp">Statistics</a> 
+			<a href="Logout.html">Logout</a>
 		</div>
 	</header>
 	<div class="main">

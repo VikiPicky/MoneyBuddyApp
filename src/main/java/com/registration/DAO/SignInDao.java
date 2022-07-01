@@ -15,8 +15,6 @@ public class SignInDao {
 
 		Connection con = ConnectionDB.getConnection();
 
-		System.out.println("From SignIN DAO - CONNECTED");
-
 		String email = signInbean.getEmail();
 		String hashedLoginPwd = signInbean.getHashedLoginPwd();
 

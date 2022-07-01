@@ -36,7 +36,7 @@ public class RecordServlet extends HttpServlet {
 		
 		String category = request.getParameter("category");
 		String record = request.getParameter("record");
-		Double amount = (double) Integer.parseInt(request.getParameter("amount"));
+		Double amount = Double.parseDouble(request.getParameter("amount"));
 	
 		String dateString = request.getParameter("date");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -49,8 +49,9 @@ public class RecordServlet extends HttpServlet {
 		}
 		System.out.println("dateString: " + dateString);
 		System.out.println("date: " + date);
-		
-	    Double tax = (double) Integer.parseInt(request.getParameter("taxAmount"));
+		System.out.println("TaxAmount: " + request.getParameter("taxAmount"));
+	    Double tax = Double.parseDouble(request.getParameter("taxAmount"));
+	    
 		System.out.println("From Records Servlet - Set " + tax);
 		String comment = request.getParameter("comment");
 		
@@ -65,7 +66,7 @@ public class RecordServlet extends HttpServlet {
 		UserBean userBean = (UserBean) request.getSession().getAttribute("session_user");
 		RecordDao recordDao = new RecordDao();
 		recordDao.addRecord(recordBean, userBean);
-
+		
 		System.out.println("From Records Servlet - Set " + comment);
 		
 

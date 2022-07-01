@@ -49,10 +49,12 @@ input[type=submit]:hover {
 .container {
 	border-style: solid;
 	margin-top: 30px;
+	
 }
 
 body {
 margin:0;
+
 }
 
 #RecordTable {
@@ -82,8 +84,10 @@ margin:0;
 <body>
 	<header>
 		<div class="navbar">
-			<a href="Home.jsp">Home</a> <a href="ProfileServlet">Profile</a> <a
-				href="Statistics.html">Statistics</a> <a href="Logout.html">Logout</a>
+			<a href="Home.jsp">Home</a> 
+			<a href="ProfileServlet">Profile</a> 
+			<a href="Statistics.jsp">Statistics</a> 
+			<a href="Logout.html">Logout</a>
 		</div>
 	</header>
 	<div class="main">
@@ -117,13 +121,13 @@ margin:0;
 	<input type="text" placeholder="Enter Name" name="record" required> 
 	
 	<label for="amount"><b>Amount</b></label> 
-	<input type="number" placeholder="Enter Amount" name="amount" required> 
+	<input type="number" placeholder="Enter Amount" name="amount" required min="0" step=".01"> 
 	
 	<label for="date">Date</label> 
 	<input type="date" id="date" name="date">
 	
 	<label for="taxAmount"><b>Tax Amount</b></label> 
-	<input type="number" placeholder="Enter Tax Amount" name="taxAmount" required> 
+	<input type="number" placeholder="Enter Tax Amount" name="taxAmount" min="0" step=".01"> 
 	
 	<label for="comment">Comment</label> 
 	<input type="text" id="comment" name="comment">
@@ -133,6 +137,8 @@ margin:0;
 	</form>
 	
 	<br>
+	<br>
+	
 	<%
 try
 {       
@@ -169,10 +175,10 @@ try
             <tr>
             <td><%= rs.getString(1)%></td>
             <td><%= rs.getString(2)%></td>
-            <td><%= rs.getInt(3)%></td>
+            <td><%= rs.getDouble(3)%></td>
             <td><%= rs.getString(4)%></td>
             <td><%= rs.getString(5)%></td>
-            <td><%= rs.getInt(6)%></td>
+            <td><%= rs.getDouble(6)%></td>
             <td>Edit</td>
             <td>Delete</td></tr>
            
