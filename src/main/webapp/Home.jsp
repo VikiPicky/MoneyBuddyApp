@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 	
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+	 <%@ page import="java.sql.*" %>
+	 <%@ page import="com.registration.model.UserBean" %>
+	 <%@ page import="com.core.model.RecordBean" %>
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +21,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-input[type=text], [type=date], select {
+input[type=text], [type=date], [type=number],select {
 	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -61,41 +64,103 @@ input[type=submit]:hover {
 		<p>Some text some text some text some text..</p>
 	</div>
 
-	<h1>Welcome Home</h1>
+	<h1>Make an Expense Record</h1>
 
-	<form action="CategorySaveServlet" method="post">
-		<div class="container">
-			<h2>Create Expense Category</h2>
-			<label for="category"><b>Category</b></label> <input type="text"
-				placeholder="Enter Category" name="category" required> <input
-				type="submit" value="Save">
-
-		</div>
-	</form>
-
-	<form action="CategoryServlet" method="get">
-	<div class="container">
-    Select a Category:&nbsp;
-    <select name="category">
-        <c:forEach items="${listCategory}" var="category">
-            <option value="${category.categoryId}">${category.categoryName}</option>
-        </c:forEach>
-    </select>
-    <br/><br/>
-    <input type="submit" value="Get My Categories" />
-    </div>
-	</form>
 
 	<form action="RecordServlet" method="post">
-		<div class="container">
-			<h2>Make an Expense Record</h2>
-			<label for="record"><b>Record</b></label> <input type="text"
-				placeholder="Enter Expense Record" name="income" required> <label
-				for="birthday">Date</label> <input type="date" id="date" name="date">
+	
+		<div class="container">		
+			
+	<label for="category">Choose a category</label>		
+	<select name="category" id="categories" name="category">
+    <option value="utilities">Utilities</option>
+    <option value="housing">Housing</option>
+    <option value="transportation">Transportation</option>
+    <option value="food">Food</option>
+    <option value="clothing">Clothing</option>
+    <option value="medical">Medical</option>
+    <option value="insurance">Insurance</option>
+    <option value="household">Household Items</option>
+    <option value="personal">Personal</option>
+    <option value="entertainment">Entertainment </option>
+    <option value="other">Other </option>
+  </select>
+  <br><br>
+  
+	<label for="record"><b>Record</b></label> 
+	<input type="text" placeholder="Enter Name" name="record" required> 
+	
+	<label for="amount"><b>Amount</b></label> 
+	<input type="number" placeholder="Enter Amount" name="amount" required> 
+	
+	<label for="date">Date</label> 
+	<input type="date" id="date" name="date">
+	
+	<label for="taxAmount"><b>Tax Amount</b></label> 
+	<input type="number" placeholder="Enter Tax Amount" name="taxAmount" required> 
+	
+	<label for="comment">Comment</label> 
+	<input type="text" id="comment" name="comment">
 
-			<input type="submit" value="Submit">
-		</div>
+	<input type="submit" value="Save">
+	</div>
 	</form>
+	
+	<br>
+	<%
+try
+{       
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/moneybuddy","root","");
+        String sql = "SELECT Category, Record, Amount, Date, Comment, TaxAmount from RECORD where userid=?";
+        out.println("Home.jsp Table connected");
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        UserBean userBean = new UserBean();
+        preparedStatement.setInt(1, userBean.getUserID());
+	
+        ResultSet rs = preparedStatement.executeQuery();
+        if(rs.next()==false)
+        {
+            out.println("No Records in the table");
+        }
+        else
+        {%>
+       
+        <table border="1">
+        <tr>
+        <th>Category</th>
+        <th>Record</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Comment</th>
+        <th>TaxAmount</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        </tr>
+        <%
+            do
+            {%>
+           
+            <tr>
+            <td><%= rs.getString(1)%></td>
+            <td><%= rs.getString(2)%></td>
+            <td><%= rs.getInt(3)%></td>
+            <td><%= rs.getString(4)%></td>
+            <td><%= rs.getString(5)%></td>
+            <td><%= rs.getInt(6)%></td>
+            <td>Edit</td>
+            <td>Delete</td></tr>
+           
+            <%}while(rs.next());
+        }       
+}
+catch(Exception e)
+{
+    System.out.println(e.getMessage());
+    e.getStackTrace();
+}
+%>
+</table>
+	
 </body>
 </html>
 

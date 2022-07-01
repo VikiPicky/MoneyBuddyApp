@@ -14,11 +14,9 @@ public class ConnectionDB {
 	
 	public static Connection getConnection() {
 		try {
-			System.out.println("Database 1");
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
-			System.out.println("Database 2");
-				
+					
 			Statement stmt = connection.createStatement();
 			
 			String sql = 
@@ -34,10 +32,7 @@ public class ConnectionDB {
 			String sql4 = "CREATE TABLE IF NOT EXISTS income (IncomeID INT NOT NULL auto_increment,Date DATE NOT NULL,Amount DECIMAL(10,2) NOT NULL, UserID INT NOT NULL, PRIMARY KEY (IncomeID), CONSTRAINT FK_INCOME_USER FOREIGN KEY (UserID) REFERENCES USER(UserID));";
 			stmt.executeUpdate(sql4);
 				
-			String sql5= "CREATE TABLE IF NOT EXISTS category (CategoryID INT NOT NULL auto_increment, CategoryName VARCHAR(45) NOT NULL, `UserID` INT NOT NULL, PRIMARY KEY (`CategoryID`), CONSTRAINT FK_USER FOREIGN KEY (UserID) REFERENCES USER(UserID));";
-			stmt.executeUpdate(sql5);
-			
-			String sql6= "CREATE TABLE IF NOT EXISTS record (RecordID INT NOT NULL auto_increment,Date DATE NOT NULL,Amount DECIMAL(10,2) NOT NULL,Comment LONGTEXT NULL DEFAULT NULL, TaxAmount DECIMAL(2,2) NULL DEFAULT NULL,CategoryID INT NOT NULL,  PRIMARY KEY (RecordID), CONSTRAINT FK_CATEGORY FOREIGN KEY (CategoryID) REFERENCES CATEGORY(CategoryID));";
+			String sql6= "CREATE TABLE IF NOT EXISTS record (RecordID INT NOT NULL auto_increment,Category VARCHAR(45) NOT NULL, Record VARCHAR(45) NOT NULL, Amount DECIMAL(15,2) NOT NULL, Date DATE NOT NULL, Comment LONGTEXT NULL DEFAULT NULL, TaxAmount DECIMAL(10,2) NULL DEFAULT NULL,`UserID` INT NOT NULL,  PRIMARY KEY (RecordID), CONSTRAINT FK_USER FOREIGN KEY (UserID) REFERENCES USER(UserID));";
 			stmt.executeUpdate(sql6);
 			System.out.println("From My Connection Class - CONNECTED and Created");
 			
