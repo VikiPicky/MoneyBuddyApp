@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.registration.DAO.SignInDao;
 import com.registration.DAO.UserDao;
 import com.registration.model.SignInBean;
 import com.registration.model.UserBean;
@@ -43,7 +42,7 @@ public class SignInServlet extends HttpServlet {
 
 		System.out.println("SignInServlet: instances created");
 
-		// hash the password to compare with hasghed pwd stored in db
+		// hash the password to compare with hashed pwd stored in db
 
 		String hashedLoginPwd;
 		try {
@@ -54,18 +53,20 @@ public class SignInServlet extends HttpServlet {
 		}
 
 		UserDao userDao = new UserDao();
-		
 
 		UserBean userBean = userDao.getActiveUser(email, hashedLoginPwd);
 
 		if (userBean != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("session_user", userBean);
-			RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
-			rd.forward(request, response);
-		} else {
+			if (userBean.getAdmin() == 1) {
+				response.sendRedirect("UserManagement.jsp");
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
+				rd.forward(request, response);
+			}
+		} else
 			response.sendRedirect("index.html");
-		}
 	}
 
 	private static String createHash(String password) throws NoSuchAlgorithmException {

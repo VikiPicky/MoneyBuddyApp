@@ -8,6 +8,7 @@ public class UserBean {
 	private String password;	
 	private String email;
 	private String telephone;
+	private int adminValue;
 
 	
 	public UserBean() {
@@ -15,7 +16,7 @@ public class UserBean {
 	}
 		
 	public UserBean(int userID, String firstName, String lastName, String userName, String password, String email,
-			String telephone) {
+			String telephone, int adminValue) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -24,7 +25,7 @@ public class UserBean {
 		this.password = password;
 		this.email = email;
 		this.telephone = telephone;
-
+		this.adminValue = adminValue;
 	}
 	
 	public String getFirstName() {
@@ -70,4 +71,12 @@ public class UserBean {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}	
+	
+	public int getAdmin() {
+		return adminValue;
+	}
+
+	public void setAdmin(int adminValue) {
+		this.adminValue = adminValue;
+	}
 }

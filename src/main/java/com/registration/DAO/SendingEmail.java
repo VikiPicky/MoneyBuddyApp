@@ -1,15 +1,19 @@
 package com.registration.DAO;
 
 import java.util.Properties;
+
+import com.registration.model.UserBean;
+
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 public class SendingEmail {
-	private String userEmail;
+	private UserBean userBean;
 
-	public SendingEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public SendingEmail(UserBean userBean) {
+		this.userBean = userBean;
+
 	}
 
 	public void sendEmail() {
@@ -36,10 +40,10 @@ public class SendingEmail {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(email));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(userBean.getEmail()));
 			message.setSubject("MoneyBuddy Email Verification");
 			message.setText("Registered successfully.Please verify your account using by following the link "
-					+ "http://localhost:8080/TestMaven/ActivateAccount?key=" +userEmail);
+					+ "http://localhost:8080/TestMaven/ActivateAccount?key1=" + userBean.getEmail() + "&key2=" + userBean.getAdmin());
 			Transport.send(message);
 		} catch (Exception ex) {
 			System.out.println("Sending Email to User" + ex);

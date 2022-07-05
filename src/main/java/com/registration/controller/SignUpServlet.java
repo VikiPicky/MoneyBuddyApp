@@ -41,6 +41,17 @@ public class SignUpServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		String telephone = request.getParameter("telephone");
+		String admin = request.getParameter("admin");
+		
+		Integer adminValue = null;
+		if("ON".equals(admin)){
+			adminValue = 1;
+			} else{
+				adminValue = 0;
+			}
+		
+		
+		System.out.println("admin value " + adminValue);
 
 		String hashedPwd;
 		try {
@@ -58,6 +69,7 @@ public class SignUpServlet extends HttpServlet {
 		user.setPassword(hashedPwd);
 		user.setEmail(email);
 		user.setTelephone(telephone);
+		user.setAdmin(adminValue);
 
 		UserDao userDao = new UserDao();
 		String registeredUser = userDao.RegisterUser(user);
