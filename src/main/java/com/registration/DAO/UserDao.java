@@ -81,7 +81,8 @@ public class UserDao {
 							rs.getString("password"),
 							rs.getString("email"),
 							rs.getString("telephone"),
-							rs.getInt("admin"));
+							rs.getInt("admin"),
+							rs.getInt("active"));
 				} 
 
 			} catch (Exception ex) {

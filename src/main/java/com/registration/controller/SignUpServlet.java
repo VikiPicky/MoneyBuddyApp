@@ -94,7 +94,7 @@ public class SignUpServlet extends HttpServlet {
 		}
 	}
 
-	private static String createHash(String password) throws NoSuchAlgorithmException {
+	public static String createHash(String password) throws NoSuchAlgorithmException {
 
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		byte[] messageDigest = md.digest(password.getBytes());

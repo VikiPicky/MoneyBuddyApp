@@ -60,7 +60,7 @@ public class SignInServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("session_user", userBean);
 			if (userBean.getAdmin() == 1) {
-				response.sendRedirect("UserManagement.jsp");
+				response.sendRedirect("UserManagement-user-form.jsp");
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
 				rd.forward(request, response);

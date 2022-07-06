@@ -9,14 +9,14 @@ public class UserBean {
 	private String email;
 	private String telephone;
 	private int adminValue;
-
+	private int active;
 	
 	public UserBean() {
 		super();		
 	}
 		
 	public UserBean(int userID, String firstName, String lastName, String userName, String password, String email,
-			String telephone, int adminValue) {
+			String telephone, int adminValue, int active) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -26,8 +26,50 @@ public class UserBean {
 		this.email = email;
 		this.telephone = telephone;
 		this.adminValue = adminValue;
+		this.active = active;
 	}
 	
+	public UserBean(String firstName, String lastName, String userName, String password, String email,
+			String telephone, int adminValue, int active) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.telephone = telephone;
+		this.adminValue = adminValue;
+		this.active = active;
+	}
+	
+	public UserBean(String firstName, String lastName, String userName, String password, String email,
+			String telephone) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.telephone = telephone;
+
+	}
+	
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public int getAdminValue() {
+		return adminValue;
+	}
+
+	public void setAdminValue(int adminValue) {
+		this.adminValue = adminValue;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

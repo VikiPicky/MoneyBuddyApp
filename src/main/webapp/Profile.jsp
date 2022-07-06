@@ -64,7 +64,7 @@
 			</table>
 		</div>
 	</section>
-
+<span class="psw">Reset <a href="PwdReset_Email.html">password?</a></span>
 
 </body>
 </html>
