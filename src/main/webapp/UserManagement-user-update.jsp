@@ -25,42 +25,42 @@
 	<div class="container col-md-5">
 		<div class="card">
 			<div class="card-body">
-					<form action="/TestMaven/insert" method="post">
+					<form action="/TestMaven/update" method="post">
 
-				<h2>Add New User</h2>
+				<h2>Update User Record</h2>
 	
 
-				<c:if test="${userBean != null}">
-					<input type="hidden" name="userid" value="<c:out value='${userBean.userID}' />" />
+				<c:if test="${user != null}">
+					<input type="hidden" name="userID" value="<c:out value='${user.userID}' />" />
 				</c:if>
-
+				
 					<fieldset class="form-group">
 					<label>First Name</label> 
-					<input type="text" value="<c:out value='${userBean.firstName}' />" class="form-control" name="firstName" required="required">
+					<input type="text" value="<c:out value='${user.firstName}' />" class="form-control" name="firstName" required="required">
 					</fieldset>
 
 					<fieldset class="form-group">
 					<label>Last Name</label> 
-					<input type="text" value="<c:out value='${userBean.lastName}' />" class="form-control" name="lastName" required="required">
+					<input type="text" value="<c:out value='${user.lastName}' />" class="form-control" name="lastName" required="required">
 					</fieldset>
 
 					<fieldset class="form-group">
 					<label>User Name</label> 
-					<input type="text" value="<c:out value='${userBean.userName}' />" class="form-control" name="userName" required="required">
+					<input type="text" value="<c:out value='${user.userName}' />" class="form-control" name="userName" required="required">
 					</fieldset>
 				
 					<fieldset class="form-group">
 					<label>Email</label> 
-					<input type="text" value="<c:out value='${userBean.email}' />" class="form-control" name="email" required="required">
+					<input type="text" value="<c:out value='${user.email}' />" class="form-control" name="email" required="required" >
 					</fieldset>
 				
 					<fieldset class="form-group">
 					<label>Telephone</label> 
-					<input type="text" value="<c:out value='${userBean.telephone}' />" class="form-control" name="telephone" required="required">
+					<input type="text" value="<c:out value='${user.telephone}' />" class="form-control" name="telephone" required="required">
 					</fieldset>
 					
 		
-				<button type="submit" class="btn btn-success">Save and Email</button>
+				<button type="submit" class="btn btn-success">Save</button>
 				</form>
 			</div>
 		</div>

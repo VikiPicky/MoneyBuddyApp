@@ -1,4 +1,4 @@
-package com.registration.DAO;
+package com.userManagement.DAO;
 
 import java.util.Properties;
 

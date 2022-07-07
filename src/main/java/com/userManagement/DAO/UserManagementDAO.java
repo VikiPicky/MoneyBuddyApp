@@ -1,4 +1,4 @@
-package com.registration.DAO;
+package com.userManagement.DAO;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import com.registration.DAO.ConnectionDB;
 import com.registration.controller.SignUpServlet;
 import com.registration.model.UserBean;
 
@@ -22,7 +23,7 @@ public class UserManagementDAO {
 	private static final String SELECT_USER_BY_ID = "SELECT firstName, lastName, userName, password, email, telephone, admin, active from USER where userid=? ;";
 	private static final String SELECT_ALL_USERS = "SELECT * from USER;";
 	private static final String DELETE_USERS_SQL = "DELETE from USER where userid =? ;";
-	private static final String UPDATE_USERS_SQL = "UPDATE USER SET firstName=?, lastName=?, userName=?, password=?, email=?, telephone=?, admin=?, active=? WHERE userid=?;";
+	private static final String UPDATE_USERS_SQL = "UPDATE USER SET firstName=?, lastName=?, userName=?, email=?, telephone=? WHERE userid=?;";
 
 	public UserManagementDAO() {
 	}
@@ -89,7 +90,7 @@ public class UserManagementDAO {
 				String telephone = rs.getString("telephone");
 				int admin = rs.getInt("admin");
 				int active = rs.getInt("active");
-				userBean = new UserBean(firstName, lastName, userName, password, email, telephone, admin, active);
+				userBean = new UserBean(userid, firstName, lastName, userName, password, email, telephone, admin, active);
 			}
 
 		} catch (SQLException e) {
@@ -140,25 +141,23 @@ public class UserManagementDAO {
         return rowDeleted;
     }
 	
-    public boolean updateUser(UserBean userBean) throws SQLException {
+    public boolean updateUser(UserBean userBean, int userid) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = ConnectionDB.getConnection();
-        	PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
-            statement.setString(1, userBean.getFirstName());
-            statement.setString(2, userBean.getLastName());
-            statement.setString(3, userBean.getUserName());
-            statement.setString(4, userBean.getPassword());
-            statement.setString(5, userBean.getEmail());
-            statement.setString(6, userBean.getTelephone());
-            statement.setInt(7, userBean.getAdmin());
-            statement.setInt(8, userBean.getActive());
-
-            rowUpdated = statement.executeUpdate() > 0;
+        	PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+        	
+        	    	
+			preparedStatement.setString(1, userBean.getFirstName());
+			preparedStatement.setString(2, userBean.getLastName());
+			preparedStatement.setString(3, userBean.getUserName());
+			preparedStatement.setString(4, userBean.getEmail());
+			preparedStatement.setString(5, userBean.getTelephone());
+			preparedStatement.setInt(6, userid);    
+			
+            rowUpdated = preparedStatement.executeUpdate() > 0;
             
-            System.out.println("UserManagement DAO - UPDATE_USERS_SQL" + statement);
+            System.out.println("UserManagement DAO - UPDATE_USERS_SQL" + preparedStatement);
         }
         return rowUpdated;
-    }    
-    
-    
+    }        
 }
