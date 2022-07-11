@@ -1,3 +1,4 @@
+
 @charset "ISO-8859-1";
 
 *,
@@ -6,22 +7,23 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  background-color: #777;
 }
 html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: "Lato", sans-serif;
+font-family: 'IBM Plex Serif', serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
-  color: #777;
-  padding: 3rem;
+  padding: 0.7rem;
   box-sizing: border-box;
 }
-
+.header{
+  background:linear-gradient(to right top,#BEFF61e0,#1E7B18e0), url(../MoneyRain.jpg);
+  height: 100vh;
+}
 
 .btn:link,
 .btn:visited {
@@ -45,7 +47,7 @@ body {
 
 .btn-white {
   background-color: #fff;
-  color: #777;
+  color: black;
 }
 .btn::after {
   content: "";
@@ -79,40 +81,142 @@ body {
   position: absolute;
   top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -35%);
   text-align: center;
 }
 .heading-primary {
-  color: #fff;
+  color: black;
   text-transform: uppercase;
   backface-visibility: hidden;
   margin-bottom: 6rem;
 }
 .heading-primary-main {
-  display: block;
+  display: flex;
   font-size: 6rem;
   font-weight: 40rem;
-  letter-spacing: 3.5rem;
-
-  animation-name: moveInLeft;
-  animation-duration: 2s;
-  animation-timing-function: ease-out;
+  justify-content: center;
+  animation: final 0.5s linear 3.1s 1 normal forwards ;
 }
-
 .heading-primary-sub {
   display: block;
   font-size: 2rem;
   font-weight: 70rem;
   letter-spacing: 1.75rem;
-  animation: moveInRight 2s ease-out;
+  position: relative;
+  animation: appear 3s linear 5s 1 normal forwards ;
+  opacity: 0;
 }
-
 #motto {
   color: #fff;
   position: absolute;
-  bottom: 10px;
-  width: 30%;
-  margin: auto;
+  bottom: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
   text-align: center;
+  animation: appear 3s linear 5s 1 normal forwards ;
+  opacity: 0;
+  position: fixed;
+bottom: 77px;
 }
 
+
+
+.menu-logo{
+  font-size: 4rem;
+  display: flex;
+  font-family: 'Rubik', sans-serif;
+  align-items: flex-end;
+  letter-spacing: 0.5rem;
+  padding: 1em;
+  color: black;
+}
+.menu-logo-icon{
+ font-size: 3.5rem;
+}
+.menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  animation: bottom 5s linear 1s 1 normal forwards ;
+  opacity: 0;
+}
+.menu-signINup{
+  padding: 2em;
+}
+.heading-primary-main-letter{
+  transition: 0.5s;
+  opacity: 0;
+  position: relative;
+}
+.heading-primary-main .heading-primary-main-letter:hover{
+  transform: scale(1.1);
+  bottom: 10px;
+  box-shadow: 0px 100px 41px -15px rgba(0, 0, 0, 0.2);
+  color: white;
+   transition: 0.5s;
+}
+.heading-primary-main .heading-primary-main-letter:nth-child(odd){
+  animation: left 3s linear 0s 1 normal forwards ;
+}
+.heading-primary-main .heading-primary-main-letter:nth-child(even){
+  animation: right 3s linear 0s 1 normal forwards ;
+}
+@keyframes left{
+  0%{
+    left: 130%;
+    opacity: 1;
+  }
+  77%{
+    left: -5%;
+  }
+  100%{
+    left:0%;
+   opacity: 1;
+ }
+ }
+ @keyframes right{
+  0%{
+    right: 130%;
+    opacity: 1;
+  }
+  77%{
+    right: -5%;
+  }
+  100%{
+    right:0%;
+   opacity: 1;
+ }
+ }
+ @keyframes bottom{
+  0%{
+    bottom: 130%;
+    opacity: 1;
+  }
+  77%{
+    bottom: -1%;
+  }
+  100%{
+    bottom:0%;
+   opacity: 1;
+ }
+}
+@keyframes appear{
+  0%{
+    opacity: 0;
+  }
+  100%{
+   opacity: 1;
+ }
+}
+@keyframes final{
+  0%{
+    letter-spacing: 0rem;
+    transform: scale(1);
+  }
+
+  100%{
+    letter-spacing: 3rem;
+    transform: scale(1.1);
+  }
+}

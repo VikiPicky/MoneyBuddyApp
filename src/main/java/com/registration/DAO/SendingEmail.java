@@ -17,8 +17,8 @@ public class SendingEmail {
 	}
 
 	public void sendEmail() {
-		String email = "moneybuddyoop@gmail.com";
-		String password = "nkrvmcwimqzbdoww";
+		String email = "capstoneOOP@gmail.com";
+		String password = "zeusyhmcoxuliwgc";
 		String host = "smtp.gmail.com";
 
 		// Get system properties
