@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <title>MoneyBuddy Home</title>
 
-<link rel="stylesheet" href="css/Home_style.css" />
+<link rel="stylesheet" href="css/style.css" />
 <link
 	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
 	rel="stylesheet" />
@@ -20,65 +20,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<style>
-input[type=text], [type=date], [type=number],select {
-	width: 100%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
-}
-
-input[type=submit] {
-	width: 100%;
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-input[type=submit]:hover {
-	background-color: #45a049;
-}
-
-.container {
-	border-style: solid;
-	margin-top: 30px;
-	
-}
-
-body {
-margin:0;
-
-}
-
-#RecordTable {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#RecordTable td, #RecordTable th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-#RecordTable tr:hover {background-color: #ddd;}
-
-#RecordTable th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-
-
-</style>
 
 </head>
 <body>
