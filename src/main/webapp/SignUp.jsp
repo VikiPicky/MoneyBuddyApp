@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +34,16 @@
 				
 			<label for="password"><b>Password</b></label> 
 			<input type="password" placeholder="Enter Password" name="password" id="pwd" >
+			
+			<label for="password2"></label> 
+			<input type="password" placeholder="Confirm Password" name="password2" id="pwd2" >
+			<p>Tip: Password must contain 1 UpperCase Letters, 1 LowerCase Letters and 1 digit</p>
+			
+			<span style="color:red;">	 <c:out value='${errorNoMatch}' ></c:out>		</span><br>
+			
+			<span style="color:red;">	 <c:out value='${error}' ></c:out>		</span><br>
 
-	
+			
 			<label for="email"><b>Email</b></label> 
 			<input type="text" placeholder="Enter Email" name="email" id="em" > 
 			
@@ -49,7 +64,7 @@
 			</div>
 		</div>
 	</form>
-
+	
 </body>
 
 </html>

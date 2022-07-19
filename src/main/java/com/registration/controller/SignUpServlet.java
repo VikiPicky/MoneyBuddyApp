@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import com.registration.DAO.UserDao;
 import com.registration.model.UserBean;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,58 +40,77 @@ public class SignUpServlet extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		String password2 = request.getParameter("password2");
 		String email = request.getParameter("email");
 		String telephone = request.getParameter("telephone");
 		String admin = request.getParameter("admin");
-		
-		Integer adminValue = null;
-		if("ON".equals(admin)){
-			adminValue = 1;
-			} else{
-				adminValue = 0;
-			}
-		
-		
-		System.out.println("admin value " + adminValue);
 
-		String hashedPwd;
-		try {
-			hashedPwd = createHash(password);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			throw new ServletException("SignUp Servlet - hashing did not work");
+		Integer adminValue = null;
+		if ("ON".equals(admin)) {
+			adminValue = 1;
+		} else {
+			adminValue = 0;
 		}
 
-		UserBean user = new UserBean();
+		// validate Password to meet requirements
+		ValidatePassword validatePwd = new ValidatePassword();
+		String errorMessage = validatePwd.getErrorMessage(password);
+		if (errorMessage == null) {
 
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setUserName(userName);
-		user.setPassword(hashedPwd);
-		user.setEmail(email);
-		user.setTelephone(telephone);
-		user.setAdmin(adminValue);
+			// check if passwords match
+			if (password.equals(password2)) {
+				String hashedPwd;
+				
+				try {
+					hashedPwd = createHash(password);
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+					throw new ServletException("SignUp Servlet - hashing did not work");
+				}
 
-		UserDao userDao = new UserDao();
-		String registeredUser = userDao.RegisterUser(user);
+				UserBean user = new UserBean();
 
-		System.out.println("From SignUp Servlet - Registered");
+				user.setFirstName(firstName);
+				user.setLastName(lastName);
+				user.setUserName(userName);
+				user.setPassword(hashedPwd);
+				user.setEmail(email);
+				user.setTelephone(telephone);
+				user.setAdmin(adminValue);
 
-		try {
-			if (registeredUser.equals("SUCCESS")) {
-				String htmlResponse = "<html><h3>" + "Hello " + firstName + " " + lastName
-						+ "! Check your Email for validation link and start using MoneyBuddy today." + "</h3></html>";
-				PrintWriter writer = response.getWriter();
-				writer.write(htmlResponse);
+				UserDao userDao = new UserDao();
+				String registeredUser = userDao.RegisterUser(user);
 
-				System.out.println("From SignUp Servlet - Email sent");
+				System.out.println("From SignUp Servlet - Registered");
+
+				try {
+					if (registeredUser.equals("SUCCESS")) {
+						String htmlResponse = "<html><h3>" + "Hello " + firstName + " " + lastName
+								+ "! Check your Email for validation link and start using MoneyBuddy today."
+								+ "</h3></html>";
+						PrintWriter writer = response.getWriter();
+						writer.write(htmlResponse);
+
+						System.out.println("From SignUp Servlet - Email sent");
+					} else {
+
+						response.sendRedirect("index.html");
+					}
+
+				} catch (Exception ex) {
+					System.out.println("User registered" + ex);
+				}
 			} else {
-
-				response.sendRedirect("index.html");
+				// error message that pwds do not match
+				request.setAttribute("errorNoMatch", "Passwords do not match, try again");
+				RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
+				rd.include(request, response);
 			}
 
-		} catch (Exception ex) {
-			System.out.println("User registered" + ex);
+		} else {
+			request.setAttribute("error", errorMessage);
+			RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
+			rd.include(request, response);
 		}
 	}
 

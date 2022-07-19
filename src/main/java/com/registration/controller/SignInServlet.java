@@ -39,7 +39,7 @@ public class SignInServlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		
 		System.out.println("SignInServlet: instances created");
 
 		// hash the password to compare with hashed pwd stored in db
@@ -68,6 +68,7 @@ public class SignInServlet extends HttpServlet {
 		} else
 			response.sendRedirect("index.html");
 	}
+
 
 	private static String createHash(String password) throws NoSuchAlgorithmException {
 
