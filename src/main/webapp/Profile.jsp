@@ -21,6 +21,8 @@
 		<div class="navbar">
 			<a href="Home.jsp">Home</a> 
 			<a href="<%=response.encodeURL("ProfileServlet")%>">Profile</a> 
+			<a href="/TestMaven/Record/listRecord">Records</a>
+			
 			<a href="Statistics.jsp">Statistics</a> 
 			<a href="Logout.html">Logout</a>
 		</div>

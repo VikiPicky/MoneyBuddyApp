@@ -19,14 +19,18 @@
 	
 </head>
 <body>
-<header>
-<div class="navbar">
-  <a href="Home.jsp">Home</a>
-  <a href="ProfileServlet">Profile</a>
-  <a href="Statistics.jsp">Statistics</a>
-  <a href="Logout.html">Logout</a>
-</div>
-</header>
+	<header>
+		<div class="navbar">
+			<a href="Home.jsp">Home</a> 
+			<a href="ProfileServlet">Profile</a>
+			<a href="/TestMaven/Record/listRecord">Records</a>
+			 
+			<a href="Statistics.jsp">Statistics</a> 
+			<a href="Logout.html">Logout</a>
+		</div>
+	</header>
+	
+	
 <div class="main">
 
 </div>

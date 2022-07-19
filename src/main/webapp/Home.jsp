@@ -23,21 +23,25 @@
 
 </head>
 <body>
+
 	<header>
 		<div class="navbar">
 			<a href="Home.jsp">Home</a> 
 			<a href="ProfileServlet">Profile</a> 
+			<a href="/TestMaven/Record/listRecord">Records</a>
+			
 			<a href="Statistics.jsp">Statistics</a> 
 			<a href="Logout.html">Logout</a>
 		</div>
 	</header>
+
+
 	<div class="main">
 
 	<br>
 	<h1 style="width: 70%; margin: auto">Make an Expense Record</h1>
 
-
-	<form action="RecordServlet" method="post" >
+	<form action="Record/insertRecord" method="post">
 	
 		<div class="container" class="RecordForm" style="width: 70%; margin: auto">		
 			
@@ -67,7 +71,7 @@
 	<input type="date" id="date" name="date">
 	
 	<label for="taxAmount"><b>Tax Amount</b></label> 
-	<input type="number" placeholder="Enter Tax Amount" name="taxAmount" min="0" step=".01"> 
+	<input type="number" placeholder="Enter Tax Amount" name="taxAmount" min="0" step=".01" required> 
 	
 	<label for="comment">Comment</label> 
 	<input type="text" id="comment" name="comment">
@@ -77,61 +81,8 @@
 	</form>
 	
 	<br>
-	<br>
-	
-	<%
-try
-{       
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/moneybuddy","root","");
-        String sql = "SELECT Category, Record, Amount, Date, Comment, TaxAmount from RECORD where userid=?";
-        
-        PreparedStatement preparedStatement = con.prepareStatement(sql);
-		UserBean userBean = (UserBean) request.getSession().getAttribute("session_user");
-        preparedStatement.setInt(1, userBean.getUserID());
-	
-        ResultSet rs = preparedStatement.executeQuery();
-        if(rs.next()==false)
-        {
-            out.println("No Records in the table");
-        }
-        else
-        {%>
+	<br>      
        
-        <table id=RecordTable border="1">
-        <tr>
-        <th>Category</th>
-        <th>Record</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Comment</th>
-        <th>TaxAmount</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        </tr>
-        <%
-            do
-            {%>
-           
-            <tr>
-            <td><%= rs.getString(1)%></td>
-            <td><%= rs.getString(2)%></td>
-            <td><%= rs.getDouble(3)%></td>
-            <td><%= rs.getString(4)%></td>
-            <td><%= rs.getString(5)%></td>
-            <td><%= rs.getDouble(6)%></td>
-            <td>Edit</td>
-            <td>Delete</td></tr>
-           
-            <%}while(rs.next());
-        }       
-}
-catch(Exception e)
-{
-    System.out.println(e.getMessage());
-    e.getStackTrace();
-}
-%>
-</table>
 	</div>
 </body>
 </html>
