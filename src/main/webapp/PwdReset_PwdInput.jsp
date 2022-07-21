@@ -13,8 +13,12 @@
 </head>
 <body>
 
+	<h1>Create new Password</h1>
+
 <form action="PwdResetInput_type" method="post">
 		<div class="container">
+		
+		
 		
 	<label for="email"><b>Email</b></label> 
 	<input type="text" placeholder="Confirm Registered Email" name="email" required> 
@@ -24,12 +28,9 @@
 	
 	<label for="password2"></label> 
 	<input type="password" placeholder="Confirm Password" name="password2" id="pwd2" >
-	<p>Tip: Password must contain 1 UpperCase Letters, 1 LowerCase Letters and 1 digit</p>
-			
-	<span style="color:red;">	 <c:out value='${errorNoMatch}' ></c:out>		</span><br>
-			
-	<span style="color:red;">	 <c:out value='${error}' ></c:out>		</span><br>
 
+			
+		
 	<button type="submit">Save</button>
 
 		</div>

@@ -38,37 +38,24 @@ public class PwdResetInput_type extends HttpServlet {
 		String newPassword = request.getParameter("password");
 		String newPassword2 = request.getParameter("password2");
 
-		// validate Password to meet requirements
-		ValidatePassword validatePwd = new ValidatePassword();
-		String errorMessage = validatePwd.getErrorMessage(newPassword);
-		if (errorMessage == null) {
-			if (newPassword.equals(newPassword2)) {
+		if (newPassword.equals(newPassword2)) {
 
-				String hashedNewPwd;
+			String hashedNewPwd;
 
-				try {
-					hashedNewPwd = createHash(newPassword);
+			try {
+				hashedNewPwd = createHash(newPassword);
 
-					System.out.println("Pwd Input: Hashed New Pwd created");
+				System.out.println("Pwd Input: Hashed New Pwd created");
 
-				} catch (NoSuchAlgorithmException e) {
-					e.printStackTrace();
-					throw new ServletException("Swd Input Servlet- hashing did not work");
-				}
-
-				pwdUpdate(email, hashedNewPwd, response);
-			} else {
-				// error message that pwds do not match
-				request.setAttribute("errorNoMatch", "Passwords do not match, try again");
-				RequestDispatcher rd = request.getRequestDispatcher("PwdReset_PwdInput.jsp");
-				rd.include(request, response);
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+				throw new ServletException("Swd Input Servlet- hashing did not work");
 			}
-		} else {
-			request.setAttribute("error", errorMessage);
-			RequestDispatcher rd = request.getRequestDispatcher("PwdReset_PwdInput.jsp");
-			rd.include(request, response);
-		}
 
+			pwdUpdate(email, hashedNewPwd, response);
+		} else {
+			System.out.print("Password do not match");
+		}
 	}
 
 	private void pwdUpdate(String email, String hashedNewPwd, HttpServletResponse response) {
