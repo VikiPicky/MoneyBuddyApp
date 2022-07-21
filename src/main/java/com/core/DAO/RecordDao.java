@@ -26,11 +26,11 @@ public class RecordDao {
 	private static final String DELETE_RECORD_SQL = "DELETE from RECORD where recordid =? ;";
 	private static final String UPDATE_RECORD_SQL = "UPDATE RECORD SET record=?, amount=?, comment=?, taxamount=? WHERE recordid=?;";
 
-	public void insertRecord(RecordBean recordBean) throws SQLException, ServletException {
+	public void insertRecord(RecordBean recordBean) {
 
 		System.out.println(INSERT_RECORD_SQL);
 
-		try (Connection connection = ConnectionDB.getConnection();
+		try (	Connection connection = ConnectionDB.getInstance().getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_RECORD_SQL)) {
 			
 			String category = recordBean.getCategory();
@@ -58,7 +58,7 @@ public class RecordDao {
 	
 	public static RecordBean selectRecord(int recordId) {
 		RecordBean recordBean = null;
-		try (Connection connection = ConnectionDB.getConnection();
+		try (Connection connection = ConnectionDB.getInstance().getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_RECORD_BY_ID);) {
 			preparedStatement.setInt(1, recordId);
 			System.out.println("RecordServlet DAO - SELECT_RECORD_BY_ID" + preparedStatement);
@@ -95,7 +95,7 @@ public class RecordDao {
 	public static List<RecordBean> selectAllRecords() {
 		List<RecordBean> records = new ArrayList<>();
 
-		try (Connection connection = ConnectionDB.getConnection();
+		try (Connection connection = ConnectionDB.getInstance().getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_RECORDS);) {
 
 			System.out.println("RecordServlet - SELECT_ALL_RECORDS " + preparedStatement);
@@ -130,7 +130,7 @@ public class RecordDao {
 	
     public static boolean deleteRecord(int recordId) throws SQLException {
         boolean rowDeleted;
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionDB.getInstance().getConnection();
         	PreparedStatement statement = connection.prepareStatement(DELETE_RECORD_SQL);) {
             statement.setInt(1, recordId);
             rowDeleted = statement.executeUpdate() > 0;
@@ -139,9 +139,10 @@ public class RecordDao {
         }
         return rowDeleted;
     }
+    
     public static boolean updateRecord(RecordBean recordBean) throws SQLException {
         boolean rowUpdated;
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionDB.getInstance().getConnection();
         	PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_RECORD_SQL);) {
         	
         	preparedStatement.setString(1, recordBean.getRecord());

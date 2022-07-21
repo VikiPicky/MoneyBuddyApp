@@ -71,7 +71,7 @@ margin:0;
 </style>
 <title>MoneyBuddy Record Update</title>
 
-<link rel="stylesheet" href="css/style.css" />
+
 </head>
 <body>
 

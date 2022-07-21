@@ -32,7 +32,7 @@ public class UserManagementDAO {
 
 		System.out.println(INSERT_USERS_SQL);
 
-		try (Connection connection = ConnectionDB.getConnection();
+		try (Connection connection = ConnectionDB.getInstance().getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {		
 			
 			String tempPassword = "1111";
@@ -74,7 +74,7 @@ public class UserManagementDAO {
 
 	public UserBean selectUser(int userid) {
 		UserBean userBean = null;
-		try (Connection connection = ConnectionDB.getConnection();
+		try (Connection connection = ConnectionDB.getInstance().getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
 			preparedStatement.setInt(1, userid);
 			System.out.println("UserManagement DAO - SELECT_USER_BY_ID" + preparedStatement);
@@ -102,7 +102,7 @@ public class UserManagementDAO {
 	public List<UserBean> selectAllUsers() {
 		List<UserBean> users = new ArrayList<>();
 
-		try (Connection connection = ConnectionDB.getConnection();
+		try (Connection connection = ConnectionDB.getInstance().getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
 
 			System.out.println("UserManagement DAO - SELECT_ALL_USERS " + preparedStatement);
@@ -131,7 +131,7 @@ public class UserManagementDAO {
 	
     public boolean deleteUser(int userid) throws SQLException {
         boolean rowDeleted;
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionDB.getInstance().getConnection();
         	PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
             statement.setInt(1, userid);
             rowDeleted = statement.executeUpdate() > 0;
@@ -143,7 +143,7 @@ public class UserManagementDAO {
 	
     public boolean updateUser(UserBean userBean, int userid) throws SQLException {
         boolean rowUpdated;
-        try (Connection connection = ConnectionDB.getConnection();
+        try (Connection connection = ConnectionDB.getInstance().getConnection();
         	PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL);) {
         	
         	    	

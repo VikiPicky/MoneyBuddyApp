@@ -13,7 +13,7 @@ public class ProfileDao {
 		
 		System.out.println("Profile Dao : IN"  );
 		try {
-			Connection con = ConnectionDB.getConnection();
+			Connection con = ConnectionDB.getInstance().getConnection();
 
 			String sql = "select * from user WHERE email=?";
 			PreparedStatement statement = con.prepareStatement(sql);

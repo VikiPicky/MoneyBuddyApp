@@ -42,7 +42,7 @@ public class PwdEmailLink extends HttpServlet {
 
 		sendPwdResetEmail(userEmail);
 
-		String htmlResponse = "<html><h3>Check your Email for password reset link</h3></html>";
+		String htmlResponse = "<html><body><h3>Thank You ! Check your Email for PASSWORD reset link and RETURN TO MoneyBuddy today.</h3></body></html>";
 		PrintWriter writer = response.getWriter();
 		writer.write(htmlResponse);
 	}

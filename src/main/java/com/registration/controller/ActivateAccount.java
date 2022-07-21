@@ -32,9 +32,9 @@ public class ActivateAccount extends HttpServlet {
 			System.out.println("ActivateAccount: " + e);
 		}
 		String userEmail = request.getParameter("key1");
-		int admin = Integer. parseInt(request. getParameter("key2"));
+	//	int admin = Integer.parseInt(request.getParameter("key2"));
 		
-		Connection con = ConnectionDB.getConnection();
+		Connection con = ConnectionDB.getInstance().getConnection();
 
 		System.out.println("ActivateAccount: Connected");
 

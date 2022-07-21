@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>MoneyBuddy Record Update</title>
 
-<link rel="stylesheet" href="css/style.css" />
+
 
 <style type="text/css">
 

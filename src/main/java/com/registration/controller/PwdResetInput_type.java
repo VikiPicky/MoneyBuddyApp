@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,42 +33,61 @@ public class PwdResetInput_type extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-		
+
 		String email = request.getParameter("email");
 		String newPassword = request.getParameter("password");
-		
-		String hashedNewPwd;
+		String newPassword2 = request.getParameter("password2");
 
-		try {
-			hashedNewPwd = createHash(newPassword);
+		// validate Password to meet requirements
+		ValidatePassword validatePwd = new ValidatePassword();
+		String errorMessage = validatePwd.getErrorMessage(newPassword);
+		if (errorMessage == null) {
+			if (newPassword.equals(newPassword2)) {
 
-			System.out.println("Pwd Input: Hashed New Pwd created");
+				String hashedNewPwd;
 
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			throw new ServletException("Swd Input Servlet- hashing did not work");
+				try {
+					hashedNewPwd = createHash(newPassword);
+
+					System.out.println("Pwd Input: Hashed New Pwd created");
+
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+					throw new ServletException("Swd Input Servlet- hashing did not work");
+				}
+
+				pwdUpdate(email, hashedNewPwd, response);
+			} else {
+				// error message that pwds do not match
+				request.setAttribute("errorNoMatch", "Passwords do not match, try again");
+				RequestDispatcher rd = request.getRequestDispatcher("PwdReset_PwdInput.jsp");
+				rd.include(request, response);
+			}
+		} else {
+			request.setAttribute("error", errorMessage);
+			RequestDispatcher rd = request.getRequestDispatcher("PwdReset_PwdInput.jsp");
+			rd.include(request, response);
 		}
 
-		pwdUpdate(email, hashedNewPwd, response);
-				
 	}
-	
+
 	private void pwdUpdate(String email, String hashedNewPwd, HttpServletResponse response) {
-		Connection con = ConnectionDB.getConnection();
+		Connection con = ConnectionDB.getInstance().getConnection();
 		System.out.println("Pwd Input: Connected");
-		
+
 		try {
-			PreparedStatement pst = con.prepareStatement("SELECT email, active, password FROM user WHERE email='" + email + "' AND active='1';");
+			PreparedStatement pst = con.prepareStatement(
+					"SELECT email, active, password FROM user WHERE email='" + email + "' AND active='1';");
 			ResultSet rs = pst.executeQuery();
 
 			if (rs.next()) {
-				PreparedStatement update = con
-						.prepareStatement("UPDATE user SET password='" + hashedNewPwd +"' WHERE active='1' AND email='" + email + "';");
-				
+				PreparedStatement update = con.prepareStatement(
+						"UPDATE user SET password='" + hashedNewPwd + "' WHERE active='1' AND email='" + email + "';");
+
 				int i = update.executeUpdate();
 				System.out.println("Password updated " + i);
 				if (i > 0) {
-					
+
 					response.sendRedirect("SignIn.html");
 				} else {
 					response.sendRedirect("index.html");
@@ -77,7 +97,7 @@ public class PwdResetInput_type extends HttpServlet {
 			}
 		} catch (Exception ex) {
 			System.out.println("Password Update " + ex.getMessage());
-		}		
+		}
 	}
 
 	private static String createHash(String newPassword) throws NoSuchAlgorithmException {

@@ -20,7 +20,7 @@ public class UserDao {
 			String telephone = userBean.getTelephone();
 			int admin = userBean.getAdmin();
 			
-			Connection con = ConnectionDB.getConnection();
+			Connection con = ConnectionDB.getInstance().getConnection();
 			 try {
 				 String INSERT_USERS_SQL = "INSERT INTO USER" +
 				            "  (firstName, lastName, userName, password, email, telephone, admin, active ) VALUES " +
@@ -47,14 +47,14 @@ public class UserDao {
 				 }
 				 
 			 } catch(Exception ex) {
-				 	System.out.println("RegistrationDao File" + ex);
+				 	System.out.println("UserDao File " + ex);
 			 }			
 			return "ERROR";			
 		}
 		
 		public UserBean getActiveUser(String email, String hashedLoginPwd) {
 
-			Connection con = ConnectionDB.getConnection();
+			Connection con = ConnectionDB.getInstance().getConnection();
 
 			System.out.println("From SignIN DAO - CONNECTED");
 
