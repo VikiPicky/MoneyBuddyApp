@@ -15,7 +15,7 @@ import com.registration.model.UserBean;
 import com.registration.model.UserBuilder;
 import com.userManagement.DAO.UserManagementDAO;
 
-@WebServlet("/")
+@WebServlet("/xxx")
 public class UserManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserManagementDAO userManagementDAO;
