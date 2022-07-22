@@ -29,14 +29,6 @@ public class UserBean {
 		this.active = active;
 	}
 
-	public UserBean(int userID, String firstName, String lastName, String userName, String email, String telephone) {
-		this(userID, firstName, lastName, userName, null, email, telephone, 0, 0);
-	}
-
-	public UserBean(String firstName, String lastName, String userName, String email, String telephone) {
-		this(0, firstName, lastName, userName, email, telephone);
-	}
-
 	public int getActive() {
 		return active;
 	}

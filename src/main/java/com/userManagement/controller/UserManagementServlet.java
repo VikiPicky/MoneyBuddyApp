@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.registration.model.UserBean;
+import com.registration.model.UserBuilder;
 import com.userManagement.DAO.UserManagementDAO;
 
-@WebServlet("/sss")
+@WebServlet("/")
 public class UserManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserManagementDAO userManagementDAO;
@@ -97,7 +98,11 @@ public class UserManagementServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String telephone = request.getParameter("telephone");
 
-		UserBean newUser = new UserBean(firstName, lastName, userName, email, telephone);
+		UserBuilder userBuilder = new UserBuilder();
+		userBuilder.setName(firstName, lastName);
+		userBuilder.setPersonalDetails(userName, email, telephone);
+
+		UserBean newUser = userBuilder.createUserBean();
 		userManagementDAO.insertUser(newUser);
 		response.sendRedirect("list");
 	}
@@ -111,10 +116,16 @@ public class UserManagementServlet extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String email = request.getParameter("email");
 		String telephone = request.getParameter("telephone");
+
+		int userid = Integer.parseInt(request.getParameter("userID"));
 		
-	int userid = Integer.parseInt(request.getParameter("userID"));
-		UserBean book = new UserBean(userid, firstName, lastName, userName, email, telephone);
-		userManagementDAO.updateUser(book, userid);
+		UserBuilder userBuilder = new UserBuilder();
+		userBuilder.setUserID(userid);
+		userBuilder.setName(firstName, lastName);
+		userBuilder.setPersonalDetails(userName, email, telephone);
+
+		UserBean updatedUser = userBuilder.createUserBean();
+		userManagementDAO.updateUser(updatedUser);
 		response.sendRedirect("list");
 	}
 
@@ -123,5 +134,5 @@ public class UserManagementServlet extends HttpServlet {
 		userManagementDAO.deleteUser(userid);
 		response.sendRedirect("list");
 	}
-	
+
 }

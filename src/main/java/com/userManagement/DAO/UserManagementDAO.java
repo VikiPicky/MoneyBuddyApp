@@ -141,7 +141,7 @@ public class UserManagementDAO {
         return rowDeleted;
     }
 	
-    public boolean updateUser(UserBean userBean, int userid) throws SQLException {
+    public boolean updateUser(UserBean userBean) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = ConnectionDB.getInstance().getConnection();
         	PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL);) {
@@ -152,7 +152,7 @@ public class UserManagementDAO {
 			preparedStatement.setString(3, userBean.getUserName());
 			preparedStatement.setString(4, userBean.getEmail());
 			preparedStatement.setString(5, userBean.getTelephone());
-			preparedStatement.setInt(6, userid);    
+			preparedStatement.setInt(6, userBean.getUserID());    
 			
             rowUpdated = preparedStatement.executeUpdate() > 0;
             
