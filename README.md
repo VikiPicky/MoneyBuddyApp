@@ -10,6 +10,6 @@ Attributions N/A
 
 The following technologies were used in the development of this application:
 
-JSP, Java, patterns, MySQL, Git
+JSP, CSS, HTML, Java, patterns, MySQL, Git
 
 Next Steps N/A
